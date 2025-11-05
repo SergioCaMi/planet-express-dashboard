@@ -51,7 +51,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>My favourite characters of Futurama</h1>
-          <SearchBox onSearchChange={onSearchChange}/>
+          <SearchBox className={'character-search-box'} onSearchChange={onSearchChange} placeholder={'search characters'}/>
           <CardList characters={filterCharacters}/>
         </header>
       </div>
