@@ -1,70 +1,134 @@
-# Getting Started with Create React App
+# 🚀 Futurama Characters App - React Learning Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Un proyecto de aprendizaje de React que muestra personajes de Futurama con funcionalidad de búsqueda en tiempo real.
 
-## Available Scripts
+## 📖 Sobre este proyecto
 
-In the project directory, you can run:
+Este es un proyecto educativo donde estoy aprendiendo los conceptos fundamentales de React, incluyendo:
+
+- ⚛️ **Componentes de clase** y ciclo de vida
+- 🔄 **Estado (state)** y manejo de datos
+- 🌐 **Consumo de APIs** con fetch
+- 🔍 **Filtrado en tiempo real** 
+- 🎨 **CSS personalizado** con fuentes custom
+- 📦 **Componentización** y reutilización de código
+
+## 🎯 Funcionalidades
+
+- ✅ **Lista de personajes**: Muestra todos los personajes de Futurama
+- ✅ **Búsqueda en tiempo real**: Filtra personajes mientras escribes
+- ✅ **Imágenes dinámicas**: Carga las imágenes de cada personaje
+- ✅ **Diseño responsive**: Se adapta a diferentes tamaños de pantalla
+- ✅ **Fuente personalizada**: Usa la fuente oficial de Futurama
+
+## 🛠️ Tecnologías utilizadas
+
+- **React** ^19.2.0
+- **JavaScript ES6+**
+- **CSS3** con custom fonts
+- **Futurama API** (https://api.sampleapis.com/futurama/characters)
+
+## 📂 Estructura del proyecto
+
+```
+src/
+├── components/
+│   ├── card-list/           # Componente para lista de tarjetas
+│   │   └── card-list.component.jsx
+│   └── search-box/          # Componente de búsqueda
+│       └── search-box.component.jsx
+├── App.js                   # Componente principal
+├── App.css                  # Estilos principales
+└── index.js                # Punto de entrada
+public/
+└── fonts/
+    └── fr-title.ttf        # Fuente personalizada de Futurama
+```
+
+## 🚀 Cómo ejecutar el proyecto
+
+### Prerrequisitos
+- Node.js (versión 14 o superior)
+- npm o yarn
+
+### Instalación
+
+1. **Clona el repositorio**
+   ```bash
+   git clone [URL-del-repositorio]
+   cd futurama
+   ```
+
+2. **Instala las dependencias**
+   ```bash
+   npm install
+   ```
+
+3. **Ejecuta el proyecto**
+   ```bash
+   npm start
+   ```
+
+4. **Abre en el navegador**
+   Ve a [http://localhost:3000](http://localhost:3000)
+
+## 💡 Conceptos de React aprendidos
+
+### 🔄 Ciclo de vida de componentes
+- `constructor()`: Inicialización del estado
+- `componentDidMount()`: Llamada a la API cuando el componente se monta
+- `render()`: Renderizado del componente
+
+### 📊 Manejo del estado
+```javascript
+this.state = {
+  characters: [],      // Array de personajes
+  searchField: ""      // Término de búsqueda
+}
+```
+
+### 🔍 Filtrado dinámico
+```javascript
+const filteredCharacters = characters.filter(character =>
+  character.name.first.toLowerCase().includes(searchField.toLowerCase())
+);
+```
+
+### 🎯 Event Handling
+```javascript
+onSearchChange = (e) => {
+  this.setState({ searchField: e.target.value });
+}
+```
+
+## 🎨 Características del diseño
+
+- **Gradiente de fondo**: Colores inspirados en Futurama
+- **Fuente personalizada**: Fuente Michroma importada de Google Fonts
+- **Grid responsive**: Las tarjetas se adaptan al tamaño de pantalla
+- **Efectos hover**: Interactividad en las tarjetas
+
+## 🐛 Scripts disponibles
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Ejecuta la app en modo desarrollo en [http://localhost:3000](http://localhost:3000)
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Lanza el runner de tests en modo interactivo
 
 ### `npm run build`
+Construye la app para producción en la carpeta `build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🤝 Contribuciones
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Este es un proyecto de aprendizaje personal, pero cualquier sugerencia o feedback es bienvenido para mejorar mi comprensión de React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📄 Licencia
 
-### `npm run eject`
+Este proyecto es de uso educativo y personal.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**¡Buen código y a seguir aprendiendo React! 🚀**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Proyecto creado con [Create React App](https://github.com/facebook/create-react-app)*
