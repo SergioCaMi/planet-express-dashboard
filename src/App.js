@@ -1,62 +1,109 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 
-class App extends Component {
-  //Constructor
-  constructor(props) {
-    super(props);
-    this.state = {
-      characters: [],
-      searchField: "",
-    };
-  }
 
-  //onMount
-  componentDidMount() {
+
+// *** Function Component ***
+const App = () => {
+  // useState reemplaza el constructor y this.state
+  const [characters, setCharacters] = useState([]);
+  const [searchField, setSearchField] = useState("");
+
+  // useEffect reemplaza componentDidMount
+  useEffect(() => {
     fetch("https://api.sampleapis.com/futurama/characters")
       .then((response) => response.json()) //Cualquier cosa devuelta de la API se guarda en response
-      .then((users) =>
-        this.setState(
-          () => {
-            return { characters: users };
-          },
-        )
-      ); //Cualquier cosa devuulta por el then anterior se guardará en users
-  }
+      .then((users) => setCharacters(users)); //Directamente seteamos los characters
+  }, []); // Array vacío significa que solo se ejecuta una vez (como componentDidMount)
 
   //función que ejecutamos a cada cambio en el input
-  onSearchChange = (e) => {
-    const searchField = e.target.value.toLowerCase();
-    this.setState(() => {
-      return { searchField }; //Mismo nombre propiedad y variable, no hace falta poner los dos: { searchField: searchField }
-    });
+  const onSearchChange = (e) => {
+    const searchFieldValue = e.target.value.toLowerCase();
+    setSearchField(searchFieldValue); //Directamente seteamos el searchField
   };
 
-  //template
-  render() {
-    const { onSearchChange } = this; // Traigo la función a una variable dentro del render().
-    const { characters, searchField } = this.state; //Traigo las variables de estado
+  // Lógica del filtrado (antes estaba*dentro del render)
+  const filterCharacters = characters.filter(
+    (c) =>
+      c.name.first.toLowerCase().includes(searchField) ||
+      c.name.middle.toLowerCase().includes(searchField) ||
+      c.name.last.toLowerCase().includes(searchField)
+  );
 
-    const filterCharacters = characters.filter(
-      (c) =>
-        c.name.first.toLowerCase().includes(searchField) ||
-        c.name.middle.toLowerCase().includes(searchField) ||
-        c.name.last.toLowerCase().includes(searchField)
-    );
-
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src="https://pngimg.com/d/futurama_PNG26.png" alt="Futurama logo"/>
-          <SearchBox className={'character-search-box'} onSearchChange={onSearchChange} placeholder={'search characters'}/>
-          <CardList characters={filterCharacters}/>
-        </header>
-      </div>
-    );
-  }
-}
+  // Return directo (no hay método render)
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src="https://pngimg.com/d/futurama_PNG26.png" alt="Futurama logo"/>
+        <SearchBox className={'character-search-box'} onSearchChange={onSearchChange} placeholder={'search characters'}/>
+        <CardList characters={filterCharacters}/>
+      </header>
+    </div>
+  );
+};
 
 export default App;
+
+
+
+// *** Class Component ***
+
+// class App extends Component {
+//   //Constructor
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       characters: [],
+//       searchField: "",
+//     };
+//   }
+
+//   //onMount
+//   componentDidMount() {
+//     fetch("https://api.sampleapis.com/futurama/characters")
+//       .then((response) => response.json()) //Cualquier cosa devuelta de la API se guarda en response
+//       .then((users) =>
+//         this.setState(
+//           () => {
+//             return { characters: users };
+//           },
+//         )
+//       ); //Cualquier cosa devuulta por el then anterior se guardará en users
+//   }
+
+//   //función que ejecutamos a cada cambio en el input
+//   onSearchChange = (e) => {
+//     const searchField = e.target.value.toLowerCase();
+//     this.setState(() => {
+//       return { searchField }; //Mismo nombre propiedad y variable, no hace falta poner los dos: { searchField: searchField }
+//     });
+//   };
+
+//   //template
+//   render() {
+//     const { onSearchChange } = this; // Traigo la función a una variable dentro del render().
+//     const { characters, searchField } = this.state; //Traigo las variables de estado
+
+//     const filterCharacters = characters.filter(
+//       (c) =>
+//         c.name.first.toLowerCase().includes(searchField) ||
+//         c.name.middle.toLowerCase().includes(searchField) ||
+//         c.name.last.toLowerCase().includes(searchField)
+//     );
+
+//     return (
+//       <div className="App">
+//         <header className="App-header">
+//           <img src="https://pngimg.com/d/futurama_PNG26.png" alt="Futurama logo"/>
+//           <SearchBox className={'character-search-box'} onSearchChange={onSearchChange} placeholder={'search characters'}/>
+//           <CardList characters={filterCharacters}/>
+//         </header>
+//       </div>
+//     );
+//   }
+// }
+
+// export default App;
